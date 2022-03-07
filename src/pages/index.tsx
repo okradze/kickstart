@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import Link from 'next/link'
 import { campaignFactoryContract } from '../contracts'
 
 type HomePageProps = {
@@ -14,6 +15,9 @@ const HomePage: NextPage<HomePageProps> = ({ campaigns }) => {
           <p key={campaign}>{campaign}</p>
         ))}
       </div>
+      <Link href='/'>
+        <a>Create Campaign</a>
+      </Link>
     </div>
   )
 }
