@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next'
-import ContributeForm from '../../components/ContibuteForm/ContributeForm'
-import { getCampaignContract } from '../../contracts'
+import Link from 'next/link'
+import ContributeForm from '../../../components/ContibuteForm/ContributeForm'
+import { getCampaignContract } from '../../../contracts'
 
 type CampaignSummary = {
   minimumContribution: string
@@ -27,6 +28,10 @@ const CampaignDetails: NextPage<CampaignSummary> = ({
         <p>Address of manager</p>
         <p>The manager created this campaign and can create requests to withdraw money</p>
       </div>
+
+      <Link href={`/campaigns/${address}/requests`}>
+        <a>View Requests</a>
+      </Link>
 
       <ContributeForm />
     </div>
