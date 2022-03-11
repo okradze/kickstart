@@ -1,4 +1,4 @@
-import { NextPage } from 'next'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
 import { getCampaignContract } from '../../../../contracts'
@@ -11,10 +11,17 @@ const RequestsNew = () => {
   const [ether, setEther] = useState('')
   const [recipient, setRecipient] = useState('')
 
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const requestsHref = `/campaigns/${router.query.address}/requests`
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
     const campaignContract = getCampaignContract(router.query.address as string)
+
+    setLoading(true)
 
     try {
       const accounts = await web3.eth.getAccounts()
@@ -22,34 +29,50 @@ const RequestsNew = () => {
       await campaignContract.methods
         .createRequest(description, web3.utils.toWei(ether, 'ether'), recipient)
         .send({ from: accounts[0] })
-    } catch (error) {}
+
+      setError('')
+
+      router.push(requestsHref)
+    } catch (error) {
+      setError('Error creating a new request')
+    }
+
+    setLoading(false)
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label>Description</label>
-        <input
-          type='text'
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Value in Ether</label>
-        <input type='text' value={ether} onChange={(e) => setEther(e.target.value)} />
-      </div>
-      <div>
-        <label>Recipient</label>
-        <input
-          type='text'
-          value={recipient}
-          onChange={(e) => setRecipient(e.target.value)}
-        />
-      </div>
+    <div>
+      <Link href={requestsHref}>
+        <a>Back</a>
+      </Link>
+      <h2>Create a Request</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          <label>Description</label>
+          <input
+            type='text'
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Value in Ether</label>
+          <input type='text' value={ether} onChange={(e) => setEther(e.target.value)} />
+        </div>
+        <div>
+          <label>Recipient</label>
+          <input
+            type='text'
+            value={recipient}
+            onChange={(e) => setRecipient(e.target.value)}
+          />
+        </div>
 
-      <button type='submit'>Create!</button>
-    </form>
+        {error && <p>{error}</p>}
+
+        <button type='submit'>{loading ? 'Creating...' : 'Create!'}</button>
+      </form>
+    </div>
   )
 }
 
