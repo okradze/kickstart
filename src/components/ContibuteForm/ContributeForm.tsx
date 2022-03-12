@@ -27,7 +27,9 @@ const ContributeForm = () => {
       })
 
       router.replace(router.asPath)
+
       setError('')
+      setAmount('')
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message)
