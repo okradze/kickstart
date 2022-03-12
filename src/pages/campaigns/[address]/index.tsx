@@ -4,6 +4,7 @@ import ContributeForm from '../../../components/ContibuteForm'
 import CampaignDetailsCard from '../../../components/CampaignDetailsCard'
 import { getCampaignContract } from '../../../contracts'
 import web3 from '../../../web3'
+import H2 from '../../../components/H2'
 
 type CampaignSummary = {
   minimumContribution: string
@@ -54,7 +55,7 @@ const CampaignDetails: NextPage<CampaignSummary> = ({
 
   return (
     <div>
-      <h2 className='text-xl font-bold mb-4'>Campaign Details</h2>
+      <H2>Campaign Details</H2>
 
       <div className='flex gap-12'>
         <div className='basis-7/12'>

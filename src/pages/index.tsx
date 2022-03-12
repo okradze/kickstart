@@ -1,5 +1,6 @@
 import { NextPage } from 'next'
 import Link from 'next/link'
+import H2 from '../components/H2'
 import { campaignFactoryContract } from '../contracts'
 
 type HomePageProps = {
@@ -9,7 +10,7 @@ type HomePageProps = {
 const HomePage: NextPage<HomePageProps> = ({ campaigns }) => {
   return (
     <div>
-      <h2 className='text-xl font-bold mb-4'>Open Campaigns</h2>
+      <H2>Open Campaigns</H2>
       <div className='flex gap-8 items-start'>
         <div className='grow'>
           {campaigns.map((address) => (

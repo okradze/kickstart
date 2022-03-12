@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import H2 from '../../../../components/H2'
 import { getCampaignContract } from '../../../../contracts'
 
 interface CampaignRequest {
@@ -21,7 +22,7 @@ const RequestsPage: NextPage<RequestsPageProps> = ({ requestsCount, requests }) 
 
   return (
     <div>
-      <h2>Requests</h2>
+      <H2>Requests</H2>
       <Link href={`${router.asPath}/new`}>
         <a>New Request</a>
       </Link>

@@ -5,6 +5,7 @@ import web3 from '../../web3'
 import { campaignFactoryContract } from '../../contracts'
 import Input from '../../components/Input'
 import Link from 'next/link'
+import H2 from '../../components/H2'
 
 const CampaignNew: NextPage = () => {
   const router = useRouter()
@@ -42,7 +43,7 @@ const CampaignNew: NextPage = () => {
 
   return (
     <div>
-      <h2 className='text-xl font-bold mb-4'>Create a Campaign</h2>
+      <H2>Create a Campaign</H2>
 
       <form onSubmit={onSubmit}>
         <Input

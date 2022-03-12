@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
+import H2 from '../../../../components/H2'
 import { getCampaignContract } from '../../../../contracts'
 import web3 from '../../../../web3'
 
@@ -45,7 +46,7 @@ const RequestsNew = () => {
       <Link href={requestsHref}>
         <a>Back</a>
       </Link>
-      <h2>Create a Request</h2>
+      <H2>Create a Request</H2>
       <form onSubmit={onSubmit}>
         <div>
           <label>Description</label>
