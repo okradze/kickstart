@@ -3,6 +3,8 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import web3 from '../../web3'
 import { campaignFactoryContract } from '../../contracts'
+import Input from '../../components/Input'
+import Link from 'next/link'
 
 const CampaignNew: NextPage = () => {
   const router = useRouter()
@@ -40,20 +42,26 @@ const CampaignNew: NextPage = () => {
 
   return (
     <div>
-      <h2>Create a Campaign</h2>
+      <Link href='/'>
+        <a className='text-cyan-700 underline'>Back to open campaigns</a>
+      </Link>
+
+      <h2 className='text-xl font-bold mt-6 mb-4'>Create a Campaign</h2>
 
       <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor=''>Minimum Contribution</label>
-          <input
-            type='text'
-            value={minimumContribution}
-            onChange={(e) => setMinimumContribution(e.target.value)}
-          />
-          <p>{error}</p>
-        </div>
+        <Input
+          label='Minimum Contribution (wei)'
+          value={minimumContribution}
+          onChange={(e) => setMinimumContribution(e.target.value)}
+        />
+        <p className='mt-2 text-red-500'>{error}</p>
 
-        <button type='submit'>{loading ? 'Creating...' : 'Create!'}</button>
+        <button
+          type='submit'
+          className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-2'
+        >
+          {loading ? 'Creating...' : 'Create!'}
+        </button>
       </form>
     </div>
   )
