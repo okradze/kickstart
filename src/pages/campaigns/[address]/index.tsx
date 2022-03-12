@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import ContributeForm from '../../../components/ContibuteForm/ContributeForm'
+import CampaignDetailsCard from '../../../components/CampaignDetailsCard'
 import { getCampaignContract } from '../../../contracts'
 
 type CampaignSummary = {
@@ -20,17 +21,48 @@ const CampaignDetails: NextPage<CampaignSummary> = ({
   managerAddress,
   address,
 }) => {
+  const cards = [
+    {
+      title: address,
+      label: 'Address Of manager',
+      description:
+        'The manager created this campaign and can create requests to withdraw money',
+    },
+    {
+      title: minimumContribution,
+      label: 'Minimum Contribution (wei)',
+      description: 'You must contribute at least this much wei to become an approver',
+    },
+    {
+      title: requestsCount,
+      label: 'Number of Requests',
+      description:
+        'A request tries to withdraw money from the contract. Requests must be approved by approvers',
+    },
+    {
+      title: approversCount,
+      label: 'Number of Approvers',
+      description: 'Number of people who have already donated to this campaign',
+    },
+    {
+      title: balance,
+      label: 'Campaign Balance (ether)',
+      description: 'The balance is how much money this campaign has left to spend',
+    },
+  ]
+
   return (
     <div>
-      <h1>Campaign Details</h1>
-      <div>
-        <p>{managerAddress}</p>
-        <p>Address of manager</p>
-        <p>The manager created this campaign and can create requests to withdraw money</p>
-      </div>
+      <h2 className='text-xl font-bold mb-4'>Campaign Details</h2>
+
+      {cards.map((props) => (
+        <CampaignDetailsCard key={props.label} {...props} />
+      ))}
 
       <Link href={`/campaigns/${address}/requests`}>
-        <a>View Requests</a>
+        <a className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block'>
+          View Requests
+        </a>
       </Link>
 
       <ContributeForm />
