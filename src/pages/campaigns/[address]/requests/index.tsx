@@ -23,8 +23,11 @@ const RequestsPage: NextPage<RequestsPageProps> = ({ requestsCount, requests }) 
   return (
     <div>
       <H2>Requests</H2>
+
       <Link href={`${router.asPath}/new`}>
-        <a>New Request</a>
+        <a className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-2'>
+          Add Request
+        </a>
       </Link>
     </div>
   )

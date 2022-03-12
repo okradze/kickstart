@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
+import Button from '../../../../components/Button'
 import H2 from '../../../../components/H2'
 import Input from '../../../../components/Input'
 import { getCampaignContract } from '../../../../contracts'
@@ -64,12 +65,9 @@ const RequestsNew = () => {
 
         <p className='mt-2 text-red-500'>{error}</p>
 
-        <button
-          type='submit'
-          className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-2'
-        >
-          {loading ? 'Creating...' : 'Create!'}
-        </button>
+        <Button type='submit' loading={loading}>
+          Create!
+        </Button>
       </form>
     </div>
   )

@@ -6,6 +6,7 @@ import { campaignFactoryContract } from '../../contracts'
 import Input from '../../components/Input'
 import Link from 'next/link'
 import H2 from '../../components/H2'
+import Button from '../../components/Button'
 
 const CampaignNew: NextPage = () => {
   const router = useRouter()
@@ -53,12 +54,9 @@ const CampaignNew: NextPage = () => {
         />
         <p className='mt-2 text-red-500'>{error}</p>
 
-        <button
-          type='submit'
-          className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-2'
-        >
-          {loading ? 'Creating...' : 'Create!'}
-        </button>
+        <Button type='submit' loading={loading}>
+          Create!
+        </Button>
       </form>
     </div>
   )

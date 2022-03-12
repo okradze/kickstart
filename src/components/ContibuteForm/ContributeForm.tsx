@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
 import { getCampaignContract } from '../../contracts'
 import web3 from '../../web3'
+import Button from '../Button'
 import Input from '../Input'
 
 const ContributeForm = () => {
@@ -50,12 +51,9 @@ const ContributeForm = () => {
 
       <p className='mt-2 text-red-500'>{error}</p>
 
-      <button
-        type='submit'
-        className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-2'
-      >
-        {loading ? 'Contributing...' : 'Contribute'}
-      </button>
+      <Button type='submit' loading={loading}>
+        Contribute
+      </Button>
     </form>
   )
 }
