@@ -13,7 +13,7 @@ const HomePage: NextPage<HomePageProps> = ({ campaigns }) => {
       <div className='flex gap-8 items-start'>
         <div className='grow'>
           {campaigns.map((address) => (
-            <div key={address} className='border-2 border-gray-200 rounded-md p-3'>
+            <div key={address} className='border-2 border-gray-200 rounded-md p-3 mb-4'>
               <p className='text-lg font-bold mb-1'>{address}</p>
               <Link href={`/campaigns/${address}`}>
                 <a className='text-cyan-700'>View Campaign</a>

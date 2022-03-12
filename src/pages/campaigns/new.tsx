@@ -42,11 +42,7 @@ const CampaignNew: NextPage = () => {
 
   return (
     <div>
-      <Link href='/'>
-        <a className='text-cyan-700 underline'>Back to open campaigns</a>
-      </Link>
-
-      <h2 className='text-xl font-bold mt-6 mb-4'>Create a Campaign</h2>
+      <h2 className='text-xl font-bold mb-4'>Create a Campaign</h2>
 
       <form onSubmit={onSubmit}>
         <Input

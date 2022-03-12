@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
 import { getCampaignContract } from '../../contracts'
 import web3 from '../../web3'
+import Input from '../Input'
 
 const ContributeForm = () => {
   const router = useRouter()
@@ -14,6 +15,8 @@ const ContributeForm = () => {
     e.preventDefault()
 
     setLoading(true)
+    setError('')
+
     const campaignContract = getCampaignContract(router.query.address as string)
 
     try {
@@ -37,16 +40,17 @@ const ContributeForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div>
-        <label>Amount to Contribute</label>
-        <input type='text' value={amount} onChange={(e) => setAmount(e.target.value)} />
-      </div>
+      <Input
+        label='Amount to Contribute (ether)'
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+      />
 
-      {error && <p>{error}</p>}
+      <p className='mt-2 text-red-500'>{error}</p>
 
       <button
         type='submit'
-        className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block'
+        className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-2'
       >
         {loading ? 'Contributing...' : 'Contribute'}
       </button>

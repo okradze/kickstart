@@ -3,6 +3,7 @@ import Link from 'next/link'
 import ContributeForm from '../../../components/ContibuteForm'
 import CampaignDetailsCard from '../../../components/CampaignDetailsCard'
 import { getCampaignContract } from '../../../contracts'
+import web3 from '../../../web3'
 
 type CampaignSummary = {
   minimumContribution: string
@@ -23,7 +24,7 @@ const CampaignDetails: NextPage<CampaignSummary> = ({
 }) => {
   const cards = [
     {
-      title: address,
+      title: managerAddress,
       label: 'Address Of manager',
       description:
         'The manager created this campaign and can create requests to withdraw money',
@@ -45,7 +46,7 @@ const CampaignDetails: NextPage<CampaignSummary> = ({
       description: 'Number of people who have already donated to this campaign',
     },
     {
-      title: balance,
+      title: web3.utils.fromWei(balance, 'ether'),
       label: 'Campaign Balance (ether)',
       description: 'The balance is how much money this campaign has left to spend',
     },
@@ -55,8 +56,8 @@ const CampaignDetails: NextPage<CampaignSummary> = ({
     <div>
       <h2 className='text-xl font-bold mb-4'>Campaign Details</h2>
 
-      <div className='grid grid-cols-2'>
-        <div>
+      <div className='flex gap-12'>
+        <div className='basis-7/12'>
           <div className='grid grid-cols-2 gap-8'>
             {cards.map((props) => (
               <CampaignDetailsCard key={props.label} {...props} />
