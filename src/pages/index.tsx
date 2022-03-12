@@ -9,13 +9,13 @@ type HomePageProps = {
 const HomePage: NextPage<HomePageProps> = ({ campaigns }) => {
   return (
     <div>
-      <h1>Open Campaigns</h1>
+      <h2 className='text-xl font-bold mb-4'>Open Campaigns</h2>
       <div>
         {campaigns.map((address) => (
-          <div key={address}>
-            <p>{address}</p>
+          <div key={address} className='border-2 border-gray-200 rounded-md p-3'>
+            <p className='text-lg font-bold mb-1'>{address}</p>
             <Link href={`/campaigns/${address}`}>
-              <a>View Campaign</a>
+              <a className='text-cyan-700'>View Campaign</a>
             </Link>
           </div>
         ))}
