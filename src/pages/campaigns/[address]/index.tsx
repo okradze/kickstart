@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
-import ContributeForm from '../../../components/ContibuteForm/ContributeForm'
+import ContributeForm from '../../../components/ContibuteForm'
 import CampaignDetailsCard from '../../../components/CampaignDetailsCard'
 import { getCampaignContract } from '../../../contracts'
 
@@ -55,17 +55,23 @@ const CampaignDetails: NextPage<CampaignSummary> = ({
     <div>
       <h2 className='text-xl font-bold mb-4'>Campaign Details</h2>
 
-      {cards.map((props) => (
-        <CampaignDetailsCard key={props.label} {...props} />
-      ))}
+      <div className='grid grid-cols-2'>
+        <div>
+          <div className='grid grid-cols-2 gap-8'>
+            {cards.map((props) => (
+              <CampaignDetailsCard key={props.label} {...props} />
+            ))}
+          </div>
 
-      <Link href={`/campaigns/${address}/requests`}>
-        <a className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block'>
-          View Requests
-        </a>
-      </Link>
+          <Link href={`/campaigns/${address}/requests`}>
+            <a className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-8'>
+              View Requests
+            </a>
+          </Link>
+        </div>
 
-      <ContributeForm />
+        <ContributeForm />
+      </div>
     </div>
   )
 }

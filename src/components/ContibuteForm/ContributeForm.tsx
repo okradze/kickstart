@@ -44,7 +44,12 @@ const ContributeForm = () => {
 
       {error && <p>{error}</p>}
 
-      <button type='submit'>{loading ? 'Contributing...' : 'Contribute'}</button>
+      <button
+        type='submit'
+        className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block'
+      >
+        {loading ? 'Contributing...' : 'Contribute'}
+      </button>
     </form>
   )
 }
