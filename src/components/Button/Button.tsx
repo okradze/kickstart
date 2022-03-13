@@ -35,7 +35,7 @@ const ButtonSpinner = () => {
 const Button = ({ children, loading, disabled, ...props }: ButtonProps) => {
   return (
     <button
-      className='flex items-center justify-center font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-2'
+      className='flex items-center justify-center font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block '
       disabled={disabled || loading}
       {...props}
     >
