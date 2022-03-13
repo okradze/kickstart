@@ -30,13 +30,17 @@ const RequestsPage: NextPage<RequestsPageProps> = ({
     <div>
       <H2>Requests</H2>
 
-      <Link href={`${router.asPath}/new`}>
-        <a className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-2'>
-          Add Request
-        </a>
-      </Link>
+      <div className='flex justify-end'>
+        <Link href={`${router.asPath}/new`}>
+          <a className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-2'>
+            Add Request
+          </a>
+        </Link>
+      </div>
 
       <RequestsTable requests={requests} approversCount={approversCount} />
+
+      <p className='mt-6 text-gray-700'>Found {requestsCount} requests.</p>
     </div>
   )
 }

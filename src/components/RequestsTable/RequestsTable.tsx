@@ -11,10 +11,7 @@ type RequestsTableProps = {
 
 const HeadCell = ({ children }: { children: React.ReactNode }) => {
   return (
-    <th
-      scope='col'
-      className='py-3 px-6 font-medium tracking-wider text-left text-gray-700 '
-    >
+    <th scope='col' className='py-3 px-6 tracking-wider text-left text-gray-700'>
       {children}
     </th>
   )
@@ -22,9 +19,7 @@ const HeadCell = ({ children }: { children: React.ReactNode }) => {
 
 const BodyCell = ({ children }: { children: React.ReactNode }) => {
   return (
-    <td className='py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap'>
-      {children}
-    </td>
+    <td className='py-4 px-6 font-medium text-gray-900 whitespace-nowrap'>{children}</td>
   )
 }
 
@@ -74,10 +69,10 @@ const RequestsTable = ({ requests, approversCount }: RequestsTableProps) => {
                 {approvalCount}/{approversCount}
               </BodyCell>
               <BodyCell>
-                <Button onClick={() => onApprove(index)}>Approve</Button>
+                {!complete && <Button onClick={() => onApprove(index)}>Approve</Button>}
               </BodyCell>
               <BodyCell>
-                <Button onClick={() => onFinalize(index)}>Finalize</Button>
+                {!complete && <Button onClick={() => onFinalize(index)}>Finalize</Button>}
               </BodyCell>
             </tr>
           ),
