@@ -1,8 +1,9 @@
 import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import H2 from '../../../../components/H2'
 import { getCampaignContract } from '../../../../contracts'
+import H2 from '../../../../components/H2'
+import RequestsTable from '../../../../components/RequestsTable'
 
 interface CampaignRequest {
   description: string
@@ -15,9 +16,14 @@ interface CampaignRequest {
 type RequestsPageProps = {
   requests: CampaignRequest[]
   requestsCount: string
+  approversCount: string
 }
 
-const RequestsPage: NextPage<RequestsPageProps> = ({ requestsCount, requests }) => {
+const RequestsPage: NextPage<RequestsPageProps> = ({
+  requestsCount,
+  approversCount,
+  requests,
+}) => {
   const router = useRouter()
 
   return (
@@ -29,6 +35,8 @@ const RequestsPage: NextPage<RequestsPageProps> = ({ requestsCount, requests }) 
           Add Request
         </a>
       </Link>
+
+      <RequestsTable requests={requests} approversCount={approversCount} />
     </div>
   )
 }
@@ -37,6 +45,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const campaignContract = getCampaignContract(query.address as string)
 
   const requestsCount = await campaignContract.methods.getRequestsCount().call()
+  const approversCount = await campaignContract.methods.approversCount().call()
 
   const requests = await Promise.all(
     Array(parseInt(requestsCount))
@@ -58,6 +67,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
     props: {
       requestsCount,
+      approversCount,
       requests,
     },
   }
