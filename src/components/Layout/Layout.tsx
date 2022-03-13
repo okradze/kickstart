@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { ReactNode, useEffect, useState } from 'react'
 import web3 from '../../web3'
 import Header from '../Header'
@@ -44,30 +45,32 @@ const Layout = ({ children }: LayoutProps) => {
     checkWeb3Network()
   }, [])
 
-  if (status === Web3Status.LOADING) {
-    return <div></div>
-  }
-
-  if (status !== Web3Status.CONNECTED) {
-    return (
-      <div className='flex items-center justify-center h-screen'>
-        <p className='flex items-center text-3xl text-gray-800 gap-6'>
-          {status === Web3Status.WRONG_NETWORK_CONNECTED && (
-            <>
-              Switching to Rinkeby Network <Spinner className='w-8 h-8 text-gray-700' />
-            </>
-          )}
-          {status === Web3Status.NO_WALLET_CONFIGURED &&
-            'Please configure your crypto wallet first'}
-        </p>
-      </div>
-    )
-  }
-
   return (
     <div className='md:container md:mx-auto px-8'>
-      <Header />
-      {children}
+      <Head>
+        <title>Kickstart</title>
+      </Head>
+
+      {status !== Web3Status.CONNECTED && (
+        <div className='flex items-center justify-center h-screen'>
+          <p className='flex items-center text-3xl text-gray-800 gap-6'>
+            {status === Web3Status.WRONG_NETWORK_CONNECTED && (
+              <>
+                Switching to Rinkeby Network <Spinner className='w-8 h-8 text-gray-700' />
+              </>
+            )}
+            {status === Web3Status.NO_WALLET_CONFIGURED &&
+              'Please configure your crypto wallet first'}
+          </p>
+        </div>
+      )}
+
+      {status === Web3Status.CONNECTED && (
+        <>
+          <Header />
+          {children}
+        </>
+      )}
     </div>
   )
 }
