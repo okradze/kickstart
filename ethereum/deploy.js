@@ -3,6 +3,7 @@ const Web3 = require('web3')
 const compiledFactory = require('./build/CampaignFactory.json')
 
 const provider = new HDWalletProvider(
+  // This is test wallet mnemonic
   'exhibit innocent scene fluid wage explain twin avocado sniff tuna soft garage',
   'https://rinkeby.infura.io/v3/b642259acda8466e906eec6e819d4c2c',
 )
