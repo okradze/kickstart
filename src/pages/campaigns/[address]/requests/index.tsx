@@ -32,7 +32,7 @@ const RequestsPage: NextPage<RequestsPageProps> = ({
 
       <div className='flex justify-end'>
         <Link href={`${router.asPath}/new`}>
-          <a className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block mt-2'>
+          <a className='font-bold bg-sky-600 text-white py-2 px-6 rounded inline-block'>
             Add Request
           </a>
         </Link>

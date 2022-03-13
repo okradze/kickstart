@@ -18,9 +18,7 @@ const HeadCell = ({ children }: { children: React.ReactNode }) => {
 }
 
 const BodyCell = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <td className='py-4 px-6 font-medium text-gray-900 whitespace-nowrap'>{children}</td>
-  )
+  return <td className='py-4 px-6 font-medium  whitespace-nowrap'>{children}</td>
 }
 
 const RequestsTable = ({ requests, approversCount }: RequestsTableProps) => {
@@ -60,7 +58,10 @@ const RequestsTable = ({ requests, approversCount }: RequestsTableProps) => {
       <tbody className='bg-white'>
         {requests.map(
           ({ description, value, recipient, approvalCount, complete }, index) => (
-            <tr key={index} className='bg-white border-b'>
+            <tr
+              key={index}
+              className={`bg-white border-b ${complete ? 'text-green-800' : ''}`}
+            >
               <BodyCell>{index}</BodyCell>
               <BodyCell>{description}</BodyCell>
               <BodyCell>{web3.utils.fromWei(value, 'ether')}</BodyCell>
